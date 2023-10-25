@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
 	Text,
@@ -19,13 +19,13 @@ export default function App() {
 	const [fontsLoaded] = useFonts({
 		Barriecito: require("./assets/fonts/Barriecito-Regular.ttf"),
 	});
-	const [text1, setText1] = React.useState("");
-	const [text2, setText2] = React.useState("");
-	const [text3, setText3] = React.useState("");
-	const [text4, setText4] = React.useState("");
-	const [text5, setText5] = React.useState("");
+	const [text1, setText1] = useState("");
+	const [text2, setText2] = useState("");
+	const [text3, setText3] = useState("");
+	const [text4, setText4] = useState("");
+	const [text5, setText5] = useState("");
 
-	const Story1 = `I woke up to ${text1} on the outside of my ${text2} window. In a daze I thought it must be the neighborhood ${text3}. I live on the ${text4}`;
+	const Story1 = `I woke up to ${text1} on the outside of my ${text2} window. In a daze I thought it must be the neighborhood ${text3}. I live on the ${text4} floor.`;
 
 	const Story2 = `My ${text1} has been refusing to sleep in his ${text2} because of a ${text3} in the ${text4}. We took the ${text4} doors off. Now none of us sleep.`;
 
@@ -35,11 +35,13 @@ export default function App() {
 
 	const Story5 = `I stood at the foot of the ${text1}, towering over ${text2} like a behemoth. The ${text3} was no match for my ${text4}.`;
 
-	const [currentStory, setCurrentStory] = React.useState(Story1);
-	const [submitted, setSubmitted] = React.useState(false);
-	const [alert, setAlert] = React.useState(false);
-	console.log("text1", text1);
-	// console.log("story1", Story1);
+	const [currentStory, setCurrentStory] = useState(Story1);
+	const [submitted, setSubmitted] = useState(false);
+	const [alert, setAlert] = useState(false);
+
+	useEffect(() => {
+		setCurrentStory(Story1);
+	}, [text1, text2, text3, text4, text5]);
 
 	if (!fontsLoaded) {
 		return null;
@@ -58,6 +60,7 @@ export default function App() {
 			<ImageBackground
 				source={bgimage}
 				resizeMode="cover"
+				backgroundAttachment="fixed"
 				style={style.image}
 			>
 				<View style={style.container}>
@@ -73,7 +76,7 @@ export default function App() {
 				<View style={style.textContainer}>
 					<TextInput
 						style={style.textInput}
-						onChangeText={() => setText1()}
+						onChangeText={setText1}
 						placeholder="Enter a noun"
 					/>
 					<TextInput
