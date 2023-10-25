@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Text, View, Image } from "react-native";
+import style from "./App.module.css";
+import { useFonts } from "expo-font";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	const [fontsLoaded] = useFonts({
+		Barriecito: require("./assets/fonts/Barriecito-Regular.ttf"),
+	});
+	if (!fontsLoaded) {
+		return null;
+	}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	return (
+		<View style={style.container}>
+			<Text style={style.heading}>Kermit Mad Libs</Text>
+			<Image></Image>
+		</View>
+	);
+}

@@ -1,7 +1,12 @@
 {
   "expo": {
-    "name": "app02",
-    "slug": "app02",
+    "name": "app01",
+    "packagerOpts": {
+        "config": "metro.config.js",
+        "sourceExts": ["js", "jsx", "css"],
+        "transformer": "node_modules/react-native-css-transformer/app.js"
+      },
+    "slug": "app01",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
